@@ -30,7 +30,7 @@ jobs:
 
       - name: Login to Docker Hub
         run: |
-          echo "ryotatoken" | \
+          echo "dckr_pat_YeneybrEjj0xxRzOSQwBCC0Wyj8" | \
           docker login -u "ryotac7" --password-stdin
 
       - name: Build Docker image
