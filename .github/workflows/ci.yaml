@@ -6,9 +6,9 @@ on:
       - main
 
 env:
-  IMAGE_NAME: TO_BE_REPLACE
-  IMAGE_TAG: TO_BE_REPLACE
-  DOCKER_REGISTRY: TO_BE_REPLACE
+  IMAGE_NAME: exam052026
+  IMAGE_TAG: latest
+  DOCKER_REGISTRY: docker.io
 
 jobs:
 
@@ -30,27 +30,27 @@ jobs:
 
       - name: Login to Docker Hub
         run: |
-          echo "TO_BE_REPLACE" | \
-          docker login -u "TO_BE_REPLACE" --password-stdin
+          echo "ryotatoken" | \
+          docker login -u "ryotac7" --password-stdin
 
       - name: Build Docker image
         run: |
-          docker build -t TO_BE_REPLACE/TO_BE_REPLACE:TO_BE_REPLACE .
+          docker build -t ryotac7/exam052026:latest .
 
       - name: Verify image
         run: |
-          docker image ls | grep TO_BE_REPLACE
+          docker image ls | grep ryotac7/exam052026
 
       - name: Push Docker image
         run: |
-          docker push TO_BE_REPLACE/TO_BE_REPLACE:TO_BE_REPLACE
+          docker push ryotac7/exam052026:latest
 
   # ===============================
   # JOB 2 - CD : DEPLOY
   # ===============================
   deploy:
     needs: ci
-    runs-on: runner-lab
+    runs-on: ubuntu-latest
 
     steps:
       - name: Pull latest image
@@ -59,9 +59,9 @@ jobs:
 
       - name: Pull latest image
         run: |
-          docker pull TO_BE_REPLACE/TO_BE_REPLACE:TO_BE_REPLACE
+          docker pull ryotac7/exam052026:latest
 
-      - name: Stop existing container
+      - name: Stop existing container  
         run: |
           docker stop ci-app || true
 
@@ -74,4 +74,4 @@ jobs:
           docker run -d \
             -p 80:80 \
             --name ci-app \
-            TO_BE_REPLACE/TO_BE_REPLACE:TO_BE_REPLACE
+            ryotac7/exam052026:latest 
